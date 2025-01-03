@@ -1,4 +1,4 @@
-package com.example.nearby.ui.theme
+package com.example.monitoring.ui.theme
 
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
