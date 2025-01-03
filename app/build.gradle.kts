@@ -3,11 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
     namespace = "com.example.monitoring"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.monitoring"
@@ -41,6 +42,11 @@ android {
 }
 
 dependencies {
+    implementation(libs.kotlin.serialization)
+    implementation(libs.navigation.compose)
+    implementation(libs.maps.compose)
+    implementation(libs.coil.compose)
+
     implementation("androidx.navigation:navigation-compose:2.8.5")
 
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
