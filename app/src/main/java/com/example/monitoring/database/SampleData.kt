@@ -1,6 +1,7 @@
 package com.example.monitoring.database
 
 import com.example.monitoring.domain.Establishments
+import com.example.monitoring.domain.Reviews
 
 val sampleDataEstablishments = listOf(
     Establishments(
@@ -28,6 +29,15 @@ val sampleDataEstablishments = listOf(
         coupons = 5,
         address = "Rua das Flores, 567 - Rio de Janeiro, RJ",
         phone = "(21) 91234-5678",
+        urlImage = "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=400&h=300"
+    )
+)
+
+val sampleDataReview = listOf(
+    Reviews(
+        name = "Jadilson",
+        comment = "Muito bom",
+        assessment = 2,
         urlImage = "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=400&h=300"
     )
 )

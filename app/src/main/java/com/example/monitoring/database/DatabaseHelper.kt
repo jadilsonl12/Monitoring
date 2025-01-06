@@ -5,14 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.monitoring.domain.Establishments
+import com.example.monitoring.domain.Reviews
 
 @Database(
-    version = 1,
-    entities = [Establishments::class]
+    version = 2,
+    entities = [Establishments::class, Reviews::class]
 )
 abstract class DatabaseHelper : RoomDatabase() {
 
     abstract fun establishmentsDao(): EstablishmentsDao
+    abstract fun reviewsDao(): ReviewsDao
 
     // Static do Kotlin
     companion object {
@@ -20,8 +22,8 @@ abstract class DatabaseHelper : RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 DatabaseHelper::class.java,
-                "establishmentsDao.db"
-            ).allowMainThreadQueries()
+                "monitoring_database.db",
+            ).allowMainThreadQueries().fallbackToDestructiveMigration()
                 .build()
         }
     }
