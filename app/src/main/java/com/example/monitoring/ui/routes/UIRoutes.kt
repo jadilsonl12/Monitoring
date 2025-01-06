@@ -12,7 +12,10 @@ data object Welcome
 data object Home
 
 @Serializable
-data object Register
+data object RegisterNewEstablishment
 
 @Serializable
 data object Details
+
+@Serializable
+data object RegisterNewCustomer
