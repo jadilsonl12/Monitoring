@@ -15,12 +15,12 @@ import com.example.monitoring.ui.screen.market_details_screen.MarketDetailsScree
 import com.example.monitoring.ui.screen.splash.SplashScreen
 import com.example.monitoring.ui.screen.welcome.WelcomeScreen
 import com.example.monitoring.ui.routes.Home
-import com.example.monitoring.ui.routes.RegisterNewCustomer
 import com.example.monitoring.ui.routes.RegisterNewEstablishment
+import com.example.monitoring.ui.routes.RegisterNewReview
 import com.example.monitoring.ui.routes.Splash
 import com.example.monitoring.ui.routes.Welcome
-import com.example.monitoring.ui.screen.register.RegisterNewCustomerScreen
 import com.example.monitoring.ui.screen.register.RegisterNewEstablishmentScreen
+import com.example.monitoring.ui.screen.register.RegisterNewReviewScreen
 import com.example.monitoring.ui.theme.MonitoringTheme
 
 class MainActivity : ComponentActivity() {
@@ -55,8 +55,8 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
-                    composable<RegisterNewCustomer> {
-                        RegisterNewCustomerScreen(
+                    composable<RegisterNewReview> {
+                        RegisterNewReviewScreen(
                             onNavigateBack = {
                                 navController.popBackStack()
                             }
@@ -77,8 +77,8 @@ class MainActivity : ComponentActivity() {
                             onNavigateBack = {
                                 navController.popBackStack()
                             },
-                            onNavigateToRegisterNewCustomer = {
-                                navController.navigate(RegisterNewCustomer)
+                            onNavigateToRegisterNewReview = {
+                                navController.navigate(RegisterNewReview)
                             }
                         )
                     }
