@@ -18,4 +18,4 @@ data object RegisterNewEstablishment
 data object Details
 
 @Serializable
-data object RegisterNewCustomer
+data object RegisterNewReview
