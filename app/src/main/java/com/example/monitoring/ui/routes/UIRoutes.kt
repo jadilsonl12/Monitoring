@@ -15,7 +15,10 @@ data object Home
 data object RegisterNewEstablishment
 
 @Serializable
-data object Details
+data object DetailsEstablishment
 
 @Serializable
 data object RegisterNewReview
+
+@Serializable
+data object DetailsReview
