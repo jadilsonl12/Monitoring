@@ -33,7 +33,12 @@ import com.example.monitoring.ui.theme.Typography
 val p = sampleDataEstablishments[0]
 
 @Composable
-fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Unit, onNavigateToRegisterNewReview: () -> Unit) {
+fun MarketDetailsScreen(
+    modifier: Modifier = Modifier,
+    onNavigateBack: () -> Unit,
+    onNavigateToRegisterNewReview: () -> Unit,
+    onNavigateToReviews: () -> Unit
+) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -76,12 +81,6 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
                             .fillMaxWidth()
                             .padding(vertical = 24.dp)
                     )
-//                    if (market.rules.isNotEmpty()) {
-//                        NearbyMarketDetailsRules(rules = market.rules)
-//                        HorizontalDivider(
-//                            modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp)
-//                        )
-//                    }
                     NearbyMarketDetailsCoupons(coupons = listOf("ABC12345"))
                 }
 
@@ -98,7 +97,7 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
                         .fillMaxWidth()
                         .padding(top = 24.dp),
                     text = "Listar avaliações",
-                    onClick = { }
+                    onClick = onNavigateToReviews
                 )
             }
         }
@@ -116,5 +115,5 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
 @Preview
 @Composable
 private fun MarketDetailsScreenPreview() {
-    MarketDetailsScreen(onNavigateBack = {}, onNavigateToRegisterNewReview = {})
+    MarketDetailsScreen(onNavigateBack = {}, onNavigateToRegisterNewReview = {}, onNavigateToReviews = {})
 }

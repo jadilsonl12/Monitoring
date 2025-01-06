@@ -9,7 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.monitoring.ui.routes.Details
+import com.example.monitoring.ui.routes.DetailsEstablishment
+import com.example.monitoring.ui.routes.DetailsReview
 import com.example.monitoring.ui.screen.home.HomeScreen
 import com.example.monitoring.ui.screen.market_details_screen.MarketDetailsScreen
 import com.example.monitoring.ui.screen.splash.SplashScreen
@@ -21,6 +22,7 @@ import com.example.monitoring.ui.routes.Splash
 import com.example.monitoring.ui.routes.Welcome
 import com.example.monitoring.ui.screen.register.RegisterNewEstablishmentScreen
 import com.example.monitoring.ui.screen.register.RegisterNewReviewScreen
+import com.example.monitoring.ui.screen.review_details.ReviewDetailsScreen
 import com.example.monitoring.ui.theme.MonitoringTheme
 
 class MainActivity : ComponentActivity() {
@@ -68,17 +70,27 @@ class MainActivity : ComponentActivity() {
                                 navController.navigate(RegisterNewEstablishment)
                             },
                             onNavigateToDetails = {
-                                navController.navigate(Details)
+                                navController.navigate(DetailsEstablishment)
                             }
                         )
                     }
-                    composable<Details> {
+                    composable<DetailsEstablishment> {
                         MarketDetailsScreen(
                             onNavigateBack = {
                                 navController.popBackStack()
                             },
                             onNavigateToRegisterNewReview = {
                                 navController.navigate(RegisterNewReview)
+                            },
+                            onNavigateToReviews = {
+                                navController.navigate(DetailsReview)
+                            }
+                        )
+                    }
+                    composable<DetailsReview> {
+                        ReviewDetailsScreen(
+                            onNavigateBack = {
+                                navController.popBackStack()
                             }
                         )
                     }
