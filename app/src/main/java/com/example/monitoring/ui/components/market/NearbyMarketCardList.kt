@@ -24,7 +24,7 @@ import com.example.monitoring.ui.theme.Typography
 @Composable
 fun NearbyMarketCardList(
     modifier: Modifier = Modifier,
-    onNavigateToRegister: () -> Unit,
+    onNavigateToRegisterNewEstablishments: () -> Unit,
     onNavigateToDetails: () -> Unit
 ) {
     val context = LocalContext.current
@@ -36,7 +36,7 @@ fun NearbyMarketCardList(
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
-                onClick = onNavigateToRegister
+                onClick = onNavigateToRegisterNewEstablishments
             ) {
                 Icon(
                     Icons.Filled.Add,
@@ -72,5 +72,5 @@ fun NearbyMarketCardList(
 @Preview
 @Composable
 private fun NearbyMarketCardListPreview() {
-    NearbyMarketCardList(onNavigateToRegister = {}, onNavigateToDetails = {})
+    NearbyMarketCardList(onNavigateToRegisterNewEstablishments = {}, onNavigateToDetails = {})
 }

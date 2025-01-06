@@ -28,7 +28,7 @@ import com.example.monitoring.ui.theme.Gray100
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    onNavigateToRegister: () -> Unit,
+    onNavigateToRegisterNewEstablishments: () -> Unit,
     onNavigateToDetails: () -> Unit,
 ) {
     val bottomSheetState = rememberBottomSheetScaffoldState()
@@ -48,8 +48,8 @@ fun HomeScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(horizontal = 16.dp),
-                    onNavigateToRegister = {
-                        onNavigateToRegister()
+                    onNavigateToRegisterNewEstablishments = {
+                        onNavigateToRegisterNewEstablishments()
                     },
                     onNavigateToDetails = {
                         onNavigateToDetails()
@@ -84,5 +84,5 @@ fun HomeScreen(
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen(onNavigateToRegister = {}, onNavigateToDetails = {})
+    HomeScreen(onNavigateToRegisterNewEstablishments = {}, onNavigateToDetails = {})
 }

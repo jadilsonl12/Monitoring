@@ -28,7 +28,7 @@ import com.example.monitoring.ui.components.button.NearbyButton
 
 
 @Composable
-fun RegisterScreen(onNavigateBack: () -> Unit) {
+fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
     val context = LocalContext.current
 
     var categoryId by remember { mutableStateOf("") }
@@ -139,7 +139,7 @@ fun RegisterScreen(onNavigateBack: () -> Unit) {
                 DatabaseHelper.getInstance(context)
                     .establishmentsDao().insert(establishment)
             }) {
-                Text("Submit")
+                Text("Cadastrar")
             }
         }
     }
@@ -151,8 +151,8 @@ fun RegisterScreen(onNavigateBack: () -> Unit) {
     device = Devices.PIXEL_3A,
 )
 @Composable
-private fun PreviewRegisterScreen() {
+private fun PreviewRegisterNewEstablishmentScreen() {
     Surface(Modifier.padding(top = 64.dp)) {
-        RegisterScreen(onNavigateBack = {})
+        RegisterNewEstablishmentScreen(onNavigateBack = {})
     }
 }
