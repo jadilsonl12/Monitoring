@@ -33,7 +33,7 @@ import com.example.monitoring.ui.theme.Typography
 val p = sampleDataEstablishments[0]
 
 @Composable
-fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Unit) {
+fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Unit, onNavigateToRegisterNewCustomer: () -> Unit) {
     Box(
         modifier = modifier.fillMaxSize()
     ) {
@@ -90,14 +90,14 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
                         .fillMaxWidth()
                         .padding(top = 24.dp),
                     text = "Tornar-se cliente",
-                    onClick = { }
+                    onClick = onNavigateToRegisterNewCustomer
                 )
 
                 NearbyButton(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 24.dp),
-                    text = "Listar clientes cadastraddos",
+                    text = "Listar clientes cadastrados",
                     onClick = { }
                 )
             }
@@ -116,5 +116,5 @@ fun MarketDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
 @Preview
 @Composable
 private fun MarketDetailsScreenPreview() {
-    MarketDetailsScreen(onNavigateBack = {})
+    MarketDetailsScreen(onNavigateBack = {}, onNavigateToRegisterNewCustomer = {})
 }
