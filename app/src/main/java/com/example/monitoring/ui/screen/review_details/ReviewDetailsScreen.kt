@@ -1,6 +1,5 @@
 package com.example.monitoring.ui.screen.review_details
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,15 +18,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.monitoring.R
 import com.example.monitoring.database.DatabaseHelper
+import com.example.monitoring.ui.theme.Typography
 import com.example.monitoring.ui.components.button.NearbyButton
 import com.example.monitoring.ui.components.review.NearbyReviewCard
-import com.example.monitoring.ui.theme.Typography
-
 
 @Composable
-fun ReviewDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Unit) {
+fun ReviewDetailsScreen(
+    modifier: Modifier = Modifier,
+    onNavigateBack: () -> Unit
+) {
     val context = LocalContext.current
-    val reviews = DatabaseHelper.getInstance(context).reviewsDao().findAll()
+    val reviews = DatabaseHelper
+        .getInstance(context)
+        .reviewsDao()
+        .findAll()
 
     Column(
         modifier
@@ -39,20 +43,18 @@ fun ReviewDetailsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Uni
             iconRes = R.drawable.ic_arrow_left,
             onClick = onNavigateBack
         )
-
         LazyColumn(
             modifier = Modifier.padding(top = 20.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
-        )
-        {
+        ) {
             item {
-                Text("Avaliações de clientes", style = Typography.bodyLarge)
+                Text(text = "Avaliações de clientes", style = Typography.bodyLarge)
             }
 
             items(reviews) { review ->
                 NearbyReviewCard(
                     modifier = Modifier.fillMaxWidth(),
-                    r = review
+                    r = review,
                 )
             }
         }
