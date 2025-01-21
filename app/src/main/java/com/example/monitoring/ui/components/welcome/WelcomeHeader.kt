@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.monitoring.R
 import com.example.monitoring.ui.theme.Typography
@@ -33,4 +34,10 @@ fun WelcomeHeader(modifier: Modifier = Modifier) {
             style = Typography.bodyLarge
         )
     }
+}
+
+@Preview
+@Composable
+private fun WelcomeHeaderPreview() {
+    WelcomeHeader(modifier = Modifier)
 }

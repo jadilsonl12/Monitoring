@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.monitoring.R
 import com.example.monitoring.ui.theme.Typography
@@ -36,4 +37,10 @@ fun WelcomeContent(modifier: Modifier = Modifier) {
             iconRes = R.drawable.ic_ticket
         )
     }
+}
+
+@Preview
+@Composable
+private fun WelcomeContentPreview() {
+    WelcomeContent(modifier = Modifier)
 }
