@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
     buildFeatures {
         compose = true
@@ -46,11 +46,16 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.maps.compose)
     implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
-    implementation("androidx.navigation:navigation-compose:2.8.5")
+    implementation(platform(libs.ktor.bom))
+    implementation(libs.bundles.ktor)
 
-    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
-    implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+    implementation(libs.zxing)
+    implementation(libs.zxing.android.embedded)
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
     val room_version = "2.6.1"
     implementation("androidx.room:room-runtime:$room_version")
