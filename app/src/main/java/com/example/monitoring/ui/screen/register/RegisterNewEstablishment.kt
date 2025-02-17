@@ -2,6 +2,7 @@ package com.example.monitoring.ui.screen.register
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -13,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,7 +26,11 @@ import androidx.compose.ui.unit.dp
 import com.example.monitoring.R
 import com.example.monitoring.database.DatabaseHelper
 import com.example.monitoring.domain.Establishments
+import com.example.monitoring.service.AddressService
 import com.example.monitoring.ui.components.button.NearbyButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -35,9 +41,13 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
     var name by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var coupons by remember { mutableStateOf(0) }
+    var cep by remember { mutableStateOf("") }
     var address by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var urlImage by remember { mutableStateOf("") }
+    var isLoading by remember { mutableStateOf(false) }
+
+    val scope = rememberCoroutineScope()
 
     Scaffold {
         Column(
@@ -94,6 +104,40 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                 label = { Text("Quantidade de cupons disponíveis") },
             )
 
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                TextField(
+                    modifier = Modifier
+                        .weight(0.65f)
+                        .fillMaxWidth(),
+                    textStyle = TextStyle(color = Color.Black),
+                    value = cep,
+                    maxLines = 1,
+                    onValueChange = { cep = it },
+                    label = { Text("CEP") },
+                )
+
+                Button(
+                    onClick = {
+                        scope.launch {
+                            isLoading = true
+                            val endereco = AddressService().findByCep(cep)
+                            address = endereco?.city ?: "Endereço não encontrado"
+                            isLoading = false
+                        }
+                    },
+                    modifier = Modifier
+                        .weight(0.35f)
+                        .fillMaxWidth(),
+                    enabled = cep.length == 8,
+                ) {
+                    Text(if (isLoading) "Buscando" else "Buscar")
+                }
+            }
+
             TextField(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -135,9 +179,14 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                     urlImage = urlImage
                 )
 
-                // Insere no banco de dados
-                DatabaseHelper.getInstance(context)
-                    .establishmentsDao().insert(establishment)
+                scope.launch {
+                    withContext(Dispatchers.IO) {
+                        // Insere no banco de dados
+                        DatabaseHelper.getInstance(context)
+                            .establishmentsDao().insert(establishment)
+                    }
+                }
+
             }) {
                 Text("Cadastrar")
             }
