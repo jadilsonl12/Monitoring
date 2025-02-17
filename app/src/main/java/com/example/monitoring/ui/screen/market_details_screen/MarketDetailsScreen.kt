@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.example.monitoring.R
+import com.example.monitoring.data.model.Market
 import com.example.monitoring.database.sampleDataEstablishments
 import com.example.monitoring.ui.components.button.NearbyButton
 import com.example.monitoring.ui.components.market_details.NearbyMarketDetailsCoupons
@@ -75,7 +76,20 @@ fun MarketDetailsScreen(
                         .weight(1f)
                         .verticalScroll(rememberScrollState())
                 ) {
-                    NearbyMarketDetailsInfos()
+                    NearbyMarketDetailsInfos(
+                        market = Market(
+                            id = "2",
+                            categoryId = "102",
+                            name = "Mercadinho da Esquina",
+                            description = "Uma experiência única de compras.",
+                            coupons = 15,
+                            latitude = -22.906847,
+                            longitude = -43.172896,
+                            address = "Rua das Flores, 567 - Rio de Janeiro, RJ",
+                            phone = "(21) 91234-5678",
+                            cover = "https://example.com/images/market2.jpg"
+                        )
+                    )
                     HorizontalDivider(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -115,5 +129,8 @@ fun MarketDetailsScreen(
 @Preview
 @Composable
 private fun MarketDetailsScreenPreview() {
-    MarketDetailsScreen(onNavigateBack = {}, onNavigateToRegisterNewReview = {}, onNavigateToReviews = {})
+    MarketDetailsScreen(
+        onNavigateBack = {},
+        onNavigateToRegisterNewReview = {},
+        onNavigateToReviews = {})
 }
