@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.graphics.drawable.toBitmap
 import com.example.monitoring.R
 import com.example.monitoring.data.model.mock.mockUserLocation
-import com.example.monitoring.ui.screen.home.HomeUiState
+import com.example.monitoring.ui.screen.home.home_api_ktor.HomeUiState
 import com.example.monitoring.ui.util.findNorthwestPoint
 import com.example.monitoring.ui.util.findSouthwestPoint
 import com.google.android.gms.maps.CameraUpdateFactory
