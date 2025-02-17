@@ -31,6 +31,7 @@ import com.example.monitoring.ui.components.button.NearbyButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import com.example.monitoring.ui.components.button.NearbyButton
 
 
 @Composable
@@ -46,9 +47,11 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
     var phone by remember { mutableStateOf("") }
     var urlImage by remember { mutableStateOf("") }
     var isLoading by remember { mutableStateOf(false) }
-
     val scope = rememberCoroutineScope()
-
+    var address by remember { mutableStateOf("") }
+    var phone by remember { mutableStateOf("") }
+    var urlImage by remember { mutableStateOf("") }
+    
     Scaffold {
         Column(
             Modifier
@@ -138,7 +141,6 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                 }
             }
 
-
             TextField(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -180,6 +182,7 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                     urlImage = urlImage
                 )
 
+
                 scope.launch {
                     withContext(Dispatchers.IO) {
                         // Insere no banco de dados
@@ -187,7 +190,9 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                             .establishmentsDao().insert(establishment)
                     }
                 }
-
+                // Insere no banco de dados
+                DatabaseHelper.getInstance(context)
+                    .establishmentsDao().insert(establishment)
             }) {
                 Text("Cadastrar")
             }
