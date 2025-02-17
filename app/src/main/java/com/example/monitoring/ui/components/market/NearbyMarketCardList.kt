@@ -14,12 +14,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.monitoring.database.DatabaseHelper
+import com.example.monitoring.domain.Establishments
 import com.example.monitoring.ui.theme.Typography
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Composable
 fun NearbyMarketCardList(
@@ -28,10 +34,20 @@ fun NearbyMarketCardList(
     onNavigateToDetails: () -> Unit
 ) {
     val context = LocalContext.current
-    val establishments = DatabaseHelper
-        .getInstance(context)
-        .establishmentsDao()
-        .findAll()
+    var establishments = remember { mutableStateListOf<Establishments>() }
+
+    LaunchedEffect(true) {
+        Thread.sleep(3000L)
+        val data = withContext(Dispatchers.IO) {
+            DatabaseHelper
+                .getInstance(context)
+                .establishmentsDao()
+                .findAll()
+        }
+
+        establishments.addAll(data)
+    }
+
 
     Scaffold(
         floatingActionButton = {

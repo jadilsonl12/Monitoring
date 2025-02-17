@@ -8,8 +8,7 @@ import com.example.monitoring.domain.Establishments
 import com.example.monitoring.domain.Reviews
 
 @Database(
-    version = 2,
-    entities = [Establishments::class, Reviews::class]
+    version = 1, entities = [Establishments::class, Reviews::class]
 )
 abstract class DatabaseHelper : RoomDatabase() {
 
@@ -23,8 +22,7 @@ abstract class DatabaseHelper : RoomDatabase() {
                 context,
                 DatabaseHelper::class.java,
                 "monitoring_database.db",
-            ).allowMainThreadQueries().fallbackToDestructiveMigration()
-                .build()
+            ).build()
         }
     }
 

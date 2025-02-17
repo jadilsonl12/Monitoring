@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,6 +23,9 @@ import com.example.monitoring.R
 import com.example.monitoring.database.DatabaseHelper
 import com.example.monitoring.domain.Reviews
 import com.example.monitoring.ui.components.button.NearbyButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Composable
@@ -31,6 +35,9 @@ fun RegisterNewReviewScreen(onNavigateBack: () -> Unit) {
     var comment by remember { mutableStateOf("") }
     var assessment by remember { mutableStateOf(0) }
     var urlImage by remember { mutableStateOf("") }
+
+
+    val scope = rememberCoroutineScope()
 
 
     Scaffold {
@@ -91,9 +98,14 @@ fun RegisterNewReviewScreen(onNavigateBack: () -> Unit) {
                         urlImage = urlImage
                     )
 
-                    //  Insere no banco de dados
+                    scope.launch {
+                        withContext(Dispatchers.IO) {
+                            //  Insere no banco de dados
 
-                    DatabaseHelper.getInstance(context).reviewsDao().insert(review)
+                            DatabaseHelper.getInstance(context).reviewsDao().insert(review)
+                        }
+                    }
+
                 }
             ) {
                 Text("Registrar avaliação")
