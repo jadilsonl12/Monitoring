@@ -4,8 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -20,6 +23,8 @@ import com.example.monitoring.ui.routes.RegisterNewEstablishment
 import com.example.monitoring.ui.routes.RegisterNewReview
 import com.example.monitoring.ui.routes.Splash
 import com.example.monitoring.ui.routes.Welcome
+import com.example.monitoring.ui.screen.home.home_api_ktor.HomeViewModal
+import com.example.monitoring.ui.screen.market_details.market_details_api_ktor.MarketDetailsViewModal
 import com.example.monitoring.ui.screen.register.RegisterNewEstablishmentScreen
 import com.example.monitoring.ui.screen.register.RegisterNewReviewScreen
 import com.example.monitoring.ui.screen.review_details.ReviewDetailsScreen
@@ -32,6 +37,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             MonitoringTheme {
                 val navController = rememberNavController()
+
+                val homeViewModal by viewModels<HomeViewModal>()
+                val homeUiState by homeViewModal.uiState.collectAsStateWithLifecycle()
+
+                val marketDetailsViewModal by viewModels<MarketDetailsViewModal>()
+                val marketDetailsUiState by marketDetailsViewModal.uiState.collectAsStateWithLifecycle()
+
                 NavHost(
                     navController = navController,
                     startDestination = Splash
