@@ -1,6 +1,5 @@
 package com.example.monitoring.ui.components.market_details
 
-
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,15 +13,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.monitoring.R
-import com.example.monitoring.database.sampleDataEstablishments
+import com.example.monitoring.data.model.Market
+import com.example.monitoring.data.model.mock.mockMarkets
 import com.example.monitoring.ui.theme.Gray400
 import com.example.monitoring.ui.theme.Gray500
 import com.example.monitoring.ui.theme.Typography
 
-val p = sampleDataEstablishments[0]
-
 @Composable
-fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier) {
+fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier, market: Market) {
     Column(
         modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -41,7 +39,7 @@ fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier) {
                     contentDescription = "Ícone Cupons"
                 )
                 Text(
-                    text = "${p.coupons} cupons disponíveis",
+                    text = "${market.coupons} cupons disponíveis",
                     style = Typography.labelMedium,
                     color = Gray500
                 )
@@ -56,7 +54,7 @@ fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier) {
                     contentDescription = "Ícone Endereço"
                 )
                 Text(
-                    text = p.address, style = Typography.labelMedium, color = Gray500
+                    text = market.address, style = Typography.labelMedium, color = Gray500
                 )
             }
             Row(
@@ -69,7 +67,7 @@ fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier) {
                     contentDescription = "Ícone Telefone"
                 )
                 Text(
-                    text = p.phone, style = Typography.labelMedium, color = Gray500
+                    text = market.phone, style = Typography.labelMedium, color = Gray500
                 )
             }
         }
@@ -81,5 +79,6 @@ fun NearbyMarketDetailsInfos(modifier: Modifier = Modifier) {
 private fun NearbyMarketDetailsInfoPreview() {
     NearbyMarketDetailsInfos(
         modifier = Modifier.fillMaxWidth(),
+        market = mockMarkets.first()
     )
 }
