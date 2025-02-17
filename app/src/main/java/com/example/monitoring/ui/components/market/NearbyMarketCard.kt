@@ -39,7 +39,9 @@ import com.example.monitoring.ui.theme.Typography
 
 @Composable
 fun NearbyMarketCard(
-    modifier: Modifier = Modifier, p: Establishments, onNavigateToDetails: () -> Unit
+    modifier: Modifier = Modifier,
+    p: Establishments,
+    onNavigateToDetails: () -> Unit,
 ) {
     Card(
         modifier = modifier
