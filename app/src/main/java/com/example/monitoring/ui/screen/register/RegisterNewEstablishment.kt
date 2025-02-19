@@ -27,6 +27,7 @@ import com.example.monitoring.R
 import com.example.monitoring.database.DatabaseHelper
 import com.example.monitoring.domain.Establishments
 import com.example.monitoring.service.AddressService
+import com.example.monitoring.service.CnpjService
 import com.example.monitoring.ui.components.button.NearbyButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,7 +46,9 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
     var address by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var urlImage by remember { mutableStateOf("") }
-    var isLoading by remember { mutableStateOf(false) }
+    var isLoadingCep by remember { mutableStateOf(false) }
+    var cnpj by remember { mutableStateOf("") }
+    var isLoadingCnjp by remember { mutableStateOf(false) }
 
     val scope = rememberCoroutineScope()
 
@@ -62,21 +65,45 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                 onClick = onNavigateBack
             )
 
-            TextField(
+            Row(
                 modifier = Modifier
                     .fillMaxWidth(),
-                textStyle = TextStyle(color = Color.Black),
-                value = categoryId,
-                maxLines = 1,
-                onValueChange = { categoryId = it },
-                label = { Text("Id") },
-            )
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                TextField(
+                    modifier = Modifier
+                        .weight(0.65f)
+                        .fillMaxWidth(),
+                    textStyle = TextStyle(color = Color.Black),
+                    value = cnpj,
+                    maxLines = 1,
+                    onValueChange = { cnpj = it },
+                    label = { Text("Cnpj") },
+                )
+
+                Button(
+                    onClick = {
+                        scope.launch {
+                            isLoadingCnjp = true
+                            val cnpj = CnpjService().findByCnpj(cnpj)
+                            categoryId = cnpj?.nome_fantasia ?: "Estabelecimento não encontrado"
+                            isLoadingCnjp = false
+                        }
+                    },
+                    modifier = Modifier
+                        .weight(0.35f)
+                        .fillMaxWidth(),
+                    enabled = cnpj.length == 14,
+                ) {
+                    Text(if (isLoadingCnjp) "Buscando" else "Buscar")
+                }
+            }
 
             TextField(
                 modifier = Modifier
                     .fillMaxWidth(),
                 textStyle = TextStyle(color = Color.Black),
-                value = name,
+                value = categoryId,
                 maxLines = 1,
                 onValueChange = { name = it },
                 label = { Text("Nome do estabelecimento") },
@@ -123,10 +150,10 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                 Button(
                     onClick = {
                         scope.launch {
-                            isLoading = true
+                            isLoadingCep = true
                             val endereco = AddressService().findByCep(cep)
                             address = endereco?.city ?: "Endereço não encontrado"
-                            isLoading = false
+                            isLoadingCep = false
                         }
                     },
                     modifier = Modifier
@@ -134,7 +161,7 @@ fun RegisterNewEstablishmentScreen(onNavigateBack: () -> Unit) {
                         .fillMaxWidth(),
                     enabled = cep.length == 8,
                 ) {
-                    Text(if (isLoading) "Buscando" else "Buscar")
+                    Text(if (isLoadingCep) "Buscando" else "Buscar")
                 }
             }
 
